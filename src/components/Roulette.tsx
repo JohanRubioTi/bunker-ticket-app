@@ -9,12 +9,10 @@ const Roulette: React.FC = () => {
     setSpinning(true);
     setResult('');
 
-    // Simula el giro por una duración aleatoria (entre 3 y 6 segundos)
     const spinDuration = Math.random() * 3000 + 3000;
 
     setTimeout(() => {
       setSpinning(false);
-      // Selecciona un premio al azar
       const prizeIndex = Math.floor(Math.random() * prizes.length);
       setResult(prizes[prizeIndex]);
     }, spinDuration);
@@ -36,10 +34,8 @@ const Roulette: React.FC = () => {
       <h1 className="text-3xl font-bold mb-4">¡Gira la Ruleta para Ganar Premios!</h1>
 
       <div className={`roulette-wheel ${spinning ? 'spinning' : ''} mb-4 relative w-64 h-64 bg-gradient-to-r from-green-500 to-black rounded-full flex items-center justify-center`}>
-        {/* Flecha indicadora */}
         <div className="absolute top-[-15px] left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-[15px] border-l-transparent border-r-[15px] border-r-transparent border-b-[20px] border-b-white"></div>
 
-        {/* Secciones de la ruleta (representación simplificada) */}
         {prizes.map((prize, index) => (
           <div
             key={index}
@@ -47,14 +43,13 @@ const Roulette: React.FC = () => {
             style={{
               rotate: `${(index * 360 / prizes.length)}deg`,
               clipPath: 'polygon(0 0, 100% 0, 50% 100%)',
-              backgroundColor: index % 2 === 0 ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.2)', // Colores alternados
+              backgroundColor: index % 2 === 0 ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.2)',
             }}
           >
             <div className="absolute top-1/4 left-1/4 text-xs text-white font-bold" style={{ transform: `rotate(${-45 + (index * 360 / prizes.length)}deg)` }}>{prize}</div>
           </div>
         ))}
 
-        {/* Círculo central */}
         <div className="absolute w-16 h-16 rounded-full bg-white flex items-center justify-center border-2 border-green-400">
           <span className="text-sm font-bold">GIRAR</span>
         </div>

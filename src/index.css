@@ -1,123 +1,130 @@
 @tailwind base;
-    @tailwind components;
-    @tailwind utilities;
+@tailwind components;
+@tailwind utilities;
 
-    body {
-      margin: 0;
-      font-family: 'Orbitron', sans-serif; /* Use the Orbitron font */
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      background-color: #000; /* Black background */
-      color: #ffffff;
-      /* Subtle animated gradient */
-      background: linear-gradient(135deg, #111, #000 20%, #111 80%, #000);
-      background-size: 200% 200%;
-      animation: gradient 15s ease infinite;
+body {
+  margin: 0;
+  font-family: 'Orbitron', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #000;
+  color: #00ffff; /* Default text color - Cyan */
+  overflow-x: hidden;
+}
 
-    }
+h1, h2, h3, h4, h5, h6 {
+    color: #00ffff; /* Cyan headings */
+}
 
-    @keyframes gradient {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
-    }
+p, span, div, label, button, a, li, input, textarea, select {
+    color: #fff;
+}
 
-    /* Blurred background elements (using pseudo-elements) */
-    body::before,
-    body::after {
-      content: '';
-      position: fixed;
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      filter: blur(100px);
-      opacity: 0.3;
-      z-index: 1; /* Ensure blurs are above the Three.js canvas */
-    }
 
-    body::before {
-      background-color: #0f0; /* Neon Green */
-      top: -50px;
-      left: -50px;
-      animation: pulseGreen 10s infinite alternate;
-    }
+/* Hero Banner Styling */
+.hero-banner {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-    body::after {
-      background-color: #00f; /* Blue (for contrast) */
-      bottom: -50px;
-      right: -50px;
-      animation: pulseBlue 8s infinite alternate;
-    }
+.hero-banner-canvas-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+}
 
-    @keyframes pulseGreen {
-      from {
-        transform: scale(0.8);
-      }
-      to {
-        transform: scale(1.2);
-      }
-    }
 
-    @keyframes pulseBlue {
-      from {
-        transform: scale(0.9);
-      }
-      to {
-        transform: scale(1.1);
-      }
-    }
+.hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 3rem;
+}
 
-    /* Card styling */
-    .card {
-      @apply bg-black rounded-lg shadow-lg overflow-hidden border border-gray-700 relative;
-    }
-    .card::before { /* Neon outline effect */
-        content: '';
-        position: absolute;
-        inset: -2px;
-        z-index: -1;
-        border-radius: inherit;
-        background: linear-gradient(to right, #0f0, #000);
-        animation: neonGlow 2s linear infinite;
-    }
 
-    @keyframes neonGlow {
-        0% {
-            filter: hue-rotate(0deg);
-        }
-        100% {
-            filter: hue-rotate(360deg);
-        }
-    }
+/* Updated Card Styling */
+.event-card {
+    @apply bg-black rounded-lg shadow-lg overflow-hidden border border-green-500 relative transition-transform duration-300 hover:scale-105;
+}
 
-    .card-content {
-      @apply p-4;
-    }
+.event-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(to right, #0f0, #000);
+    animation: neonGlow 2s linear infinite;
+}
 
-    .card-title {
-      @apply text-xl font-semibold text-white;
+@keyframes neonGlow {
+    0% {
+        filter: hue-rotate(0deg);
     }
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}
 
-    .card-date {
-      @apply text-gray-400;
-    }
+/* Genre Card Styling */
+.genre-card {
+    @apply bg-black rounded-lg shadow-md overflow-hidden border border-green-500 relative transition-transform duration-300 hover:scale-105 flex flex-col items-center justify-center;
+}
 
-    .card-button {
-      @apply mt-4 inline-block bg-transparent text-green-400 font-bold py-2 px-4 rounded border border-green-400 hover:bg-green-400 hover:text-black transition duration-300;
-    }
+.genre-card::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(to right, #0f0, #000);
+    animation: neonGlow 2s linear infinite;
+}
 
-    /* Ensure Three.js canvas is behind the blurred background */
-    .three-canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0; /* Lower z-index than body::before and body::after */
-    }
+/* Mobile Navigation Styling */
+.nav-link {
+    @apply flex flex-col items-center justify-center text-center px-3 py-2 rounded-md hover:bg-gray-800 transition-colors duration-200;
+}
+
+.nav-link.active {
+    color: #00ffff; /* Active nav link - Cyan */
+}
+
+.nav-text {
+    @apply text-xs mt-1;
+}
+
+/* Top Navigation Styling */
+.top-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.top-nav-link {
+    @apply text-white hover:text-cyan-500 transition-colors duration-200 px-3 py-2; /* Hover - Cyan */
+}
+
+
+/* --- Existing styles --- */
+
+.three-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}

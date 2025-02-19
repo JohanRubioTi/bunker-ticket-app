@@ -11,18 +11,15 @@ const Payments: React.FC = () => {
     e.preventDefault();
     setPaymentStatus('processing');
 
-    // Simula el procesamiento del pago (reemplaza con la integración real de la pasarela de pago)
     setTimeout(() => {
-      // En un escenario real, verificarías el resultado del pago desde la pasarela
-      // Para este ejemplo, simularemos aleatoriamente éxito o fracaso
-      const success = Math.random() < 0.8; // 80% de probabilidad de éxito
+      const success = Math.random() < 0.8;
 
       if (success) {
         setPaymentStatus('success');
       } else {
         setPaymentStatus('error');
       }
-    }, 2000); // Simula un retraso de 2 segundos
+    }, 2000);
   };
 
   return (

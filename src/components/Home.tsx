@@ -22,9 +22,9 @@ const generos = [
 
 const Home: React.FC = () => {
   return (
-    <div>
+    <div className="relative"> {/* Added relative positioning */}
       <HeroBanner />
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto p-4 relative z-10"> {/* Added z-index */}
         <h2 className="text-3xl font-bold mb-6 text-center">Eventos Destacados</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {eventosDestacados.map((evento) => (

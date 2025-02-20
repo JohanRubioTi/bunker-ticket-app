@@ -1,10 +1,19 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 
 const HeroBanner: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMounted, setIsMounted] = useState(false);
+  const [glitch, setGlitch] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
+
+    const glitchInterval = setInterval(() => {
+      setGlitch(true);
+      setTimeout(() => setGlitch(false), 500);
+    }, 5000);
+
     if (!containerRef.current) return;
 
     const scene = new THREE.Scene();
@@ -15,72 +24,82 @@ const HeroBanner: React.FC = () => {
     containerRef.current.appendChild(renderer.domElement);
     renderer.domElement.classList.add('three-canvas');
 
-    // --- Procedural Landscape Geometry ---
+    // --- Darker Gradient Background (as a texture) ---
+    const gradientCanvas = document.createElement('canvas');
+    gradientCanvas.width = 512;
+    gradientCanvas.height = 512;
+    const gradientContext = gradientCanvas.getContext('2d');
+
+    const updateGradient = (time: number) => {
+      if (!gradientContext) return;
+      const gradient = gradientContext.createLinearGradient(0, 0, gradientCanvas.width, gradientCanvas.height);
+      gradient.addColorStop(0, `hsl(${time * 20}, 100%, 1%)`);
+      gradient.addColorStop(0.5, 'hsl(0, 0%, 0%)');
+      gradient.addColorStop(1, 'hsl(240, 100%, 0.5%)');
+      gradientContext.fillStyle = gradient;
+      gradientContext.fillRect(0, 0, gradientCanvas.width, gradientCanvas.height);
+    };
+
+    const gradientTexture = new THREE.CanvasTexture(gradientCanvas);
+    scene.background = gradientTexture;
+
+    // --- Neon Green Wireframe ---
     const planeSize = 2000;
-    const planeSegments = 150; // Increased segments for detail
+    const planeSegments = 150;
     const geometry = new THREE.PlaneGeometry(planeSize, planeSize, planeSegments, planeSegments);
     const material = new THREE.MeshStandardMaterial({
-      color: 0x222222, // Dark base color
+      color: 0x00ff00,
       wireframe: true,
-      emissive: 0x001111 // Subtle emissive glow
+      emissive: 0x006400,
     });
     const landscape = new THREE.Mesh(geometry, material);
-    landscape.rotation.x = -Math.PI / 2; // Lay it flat
+    landscape.rotation.x = -Math.PI / 2;
     scene.add(landscape);
 
-    // Vertex displacement for landscape
     const vertices = geometry.attributes.position.array;
     for (let i = 0; i < vertices.length; i += 3) {
-      const x = vertices[i];
-      const y = vertices[i + 1];
-      const z = 0; // Initial flat plane
-      vertices[i + 2] = z;
+      vertices[i + 2] = 0;
     }
     geometry.attributes.position.needsUpdate = true;
-    geometry.computeVertexNormals(); // Ensure lighting works correctly
+    geometry.computeVertexNormals();
 
     // --- Lighting ---
-    const directionalLight = new THREE.DirectionalLight(0x00ffff, 0.5); // Cyan light
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
     directionalLight.position.set(1, 1, 1);
     scene.add(directionalLight);
 
-    const ambientLight = new THREE.AmbientLight(0xff00ff, 0.3); // Magenta ambient
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
     scene.add(ambientLight);
 
+    camera.position.set(0, 100, 500);
 
-    camera.position.set(0, 100, 500); // Initial camera position
-
-
+    // --- Animation Loop ---
     const animate = () => {
       requestAnimationFrame(animate);
 
       const scrollY = window.scrollY;
-      const normalizedScroll = scrollY / 1000; // Normalize scroll for animation
+      const normalizedScroll = scrollY / 1000;
 
-      // --- Camera Movement based on Scroll ---
-      camera.position.z = 500 - scrollY * 0.5; // Move camera forward as scrolling
-      camera.position.y = 100 + scrollY * 0.2; // Move camera up slightly
-      camera.lookAt(scene.position); // Keep looking at scene center
+      camera.position.z = 500 - scrollY * 0.5;
+      camera.position.y = 100 + scrollY * 0.2;
+      camera.lookAt(scene.position);
 
+      const time = performance.now() * 0.001;
 
-      // --- Landscape Vertex Displacement Animation ---
-      const time = performance.now() * 0.0001 + normalizedScroll; // Time + scroll for animation progression
+      updateGradient(time);
+      gradientTexture.needsUpdate = true;
 
       for (let i = 0; i < vertices.length; i += 3) {
         const x = vertices[i];
         const y = vertices[i + 1];
         let z = 0;
-
-        // Combine multiple noise waves for a richer landscape
         z += Math.sin(x * 0.02 + time) * 20;
         z += Math.cos(y * 0.02 + time * 1.3) * 15;
         z += Math.sin((x + y) * 0.03 + time * 0.7) * 10;
-
         vertices[i + 2] = z;
       }
       geometry.attributes.position.needsUpdate = true;
-      geometry.computeVertexNormals(); // Recalculate normals for lighting
-
+      geometry.computeVertexNormals();
 
       renderer.render(scene, camera);
     };
@@ -99,6 +118,8 @@ const HeroBanner: React.FC = () => {
     window.addEventListener('resize', handleResize);
 
     return () => {
+      setIsMounted(false);
+      clearInterval(glitchInterval);
       window.removeEventListener('resize', handleResize);
       if (containerRef.current) {
         containerRef.current.removeChild(renderer.domElement);
@@ -111,10 +132,18 @@ const HeroBanner: React.FC = () => {
       <div className="hero-banner-canvas-container">
         <div ref={containerRef} className="three-canvas"></div>
       </div>
+
+      {/* Main Header - Positioned Absolutely at the Top */}
+      <h1 className={`absolute top-8 left-1/2 transform -translate-x-1/2 text-6xl md:text-[8vw] font-bold text-white z-20 ${glitch ? 'glitch' : ''}`}>
+        Bunker: Boletas Rave Bogotá
+      </h1>
+
+      {/* Content Below Waves */}
       <div className="hero-content">
-        <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">Bunker: Boletas Rave Bogotá</h1>
-        <p className="text-xl md:text-2xl text-gray-300 mb-8">Explora los mejores eventos de música electrónica.</p>
-        <a href="#all-events" className="bg-green-500 hover:bg-green-700 text-black font-bold py-3 px-6 rounded-full text-lg transition duration-300">
+        <p className="text-3xl md:text-4xl text-green-500 mb-8 subheader"> {/* Added subheader class */}
+          Explora los mejores eventos de música electrónica.
+        </p>
+        <a href="#all-events" className="bg-green-500 hover:bg-green-700 text-black font-bold py-3 px-6 rounded-full text-xl md:text-2xl transition duration-300">
           Ver Eventos
         </a>
       </div>

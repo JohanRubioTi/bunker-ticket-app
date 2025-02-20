@@ -6,15 +6,16 @@ import Admin from './components/Admin';
 import Roulette from './components/Roulette';
 import Payments from './components/Payments';
 import GenreEvents from './components/GenreEvents';
-import TopNavbar from './components/TopNavbar'; // Import TopNavbar
+import TopNavbar from './components/TopNavbar';
+import "@fontsource/rajdhani";
 
 function App() {
   const location = useLocation();
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <TopNavbar /> {/* Render TopNavbar for desktop */}
-      <div className="content-area pb-20 md:pb-0 md:pt-16"> {/* Adjust padding for content area */}
+      <TopNavbar />
+      <div className="content-area pb-20 md:pb-0 md:pt-16">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/evento/:id" element={<EventDetail />} />
@@ -25,8 +26,7 @@ function App() {
         </Routes>
       </div>
 
-      {/* Bottom Navigation (Mobile) */}
-      <nav className="fixed bottom-0 left-0 w-full bg-gray-900 bg-opacity-75 border-t border-green-500 backdrop-blur-sm z-50 md:hidden"> {/* Hidden on desktop, visible on mobile */}
+      <nav className="fixed bottom-0 left-0 w-full bg-gray-900 bg-opacity-75 border-t border-green-500 backdrop-blur-sm z-50 md:hidden">
         <ul className="flex justify-around p-2">
           <li className="nav-item">
             <Link to="/" className={`nav-link ${location.pathname === '/' ? 'active' : ''}`}>

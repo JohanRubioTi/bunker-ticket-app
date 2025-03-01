@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import NeonCard from './NeonCard';
 
 const Admin: React.FC = () => {
   const [nombreEvento, setNombreEvento] = useState('');
@@ -49,9 +50,10 @@ const Admin: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">Panel de Administración</h1>
+      <h1 className="text-3xl font-bold mb-4 text-left">Panel de Administración</h1>
 
       <h2 className="text-2xl font-semibold mb-2">Crear Nuevo Evento</h2>
+      <NeonCard>
       <form onSubmit={handleSubmitEvento} className="mb-8">
         <div className="mb-4">
           <label htmlFor="nombreEvento" className="block text-sm font-medium text-gray-300">Nombre del Evento:</label>
@@ -60,7 +62,7 @@ const Admin: React.FC = () => {
             id="nombreEvento"
             value={nombreEvento}
             onChange={(e) => setNombreEvento(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-700 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 text-black"
+            className="mt-1 block w-full max-w-sm rounded-md border-2 border-green-500 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 bg-transparent text-green-500"
             required
           />
         </div>
@@ -71,7 +73,7 @@ const Admin: React.FC = () => {
             id="fechaEvento"
             value={fechaEvento}
             onChange={(e) => setFechaEvento(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-700 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 text-black"
+            className="mt-1 block w-full max-w-sm rounded-md border-2 border-green-500 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 bg-transparent text-green-500"
             required
           />
         </div>
@@ -81,7 +83,7 @@ const Admin: React.FC = () => {
             id="descripcionEvento"
             value={descripcionEvento}
             onChange={(e) => setDescripcionEvento(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-700 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 text-black"
+            className="mt-1 block w-full max-w-sm rounded-md border-2 border-green-500 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 bg-transparent text-green-500"
             required
           />
         </div>
@@ -92,7 +94,7 @@ const Admin: React.FC = () => {
             id="precioEvento"
             value={precioEvento}
             onChange={(e) => setPrecioEvento(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-700 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 text-black"
+            className="mt-1 block w-full max-w-sm rounded-md border-2 border-green-500 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 bg-transparent text-green-500"
             required
           />
         </div>
@@ -103,7 +105,7 @@ const Admin: React.FC = () => {
             id="imagenEventoUrl"
             value={imagenEventoUrl}
             onChange={(e) => setImagenEventoUrl(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-700 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 text-black"
+            className="mt-1 block w-full max-w-sm rounded-md border-2 border-green-500 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 bg-transparent text-green-500"
             required
           />
         </div>
@@ -113,7 +115,7 @@ const Admin: React.FC = () => {
             id="generoEventoId"
             value={generoEventoId}
             onChange={(e) => setGeneroEventoId(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-700 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 text-black"
+            className="mt-1 block w-full max-w-sm rounded-md border-2 border-green-500 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 bg-transparent text-green-500"
             required
           >
             <option value="">Selecciona un Género</option>
@@ -122,11 +124,13 @@ const Admin: React.FC = () => {
             ))}
           </select>
         </div>
-        <button type="submit" className="bg-green-500 hover:bg-green-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        <button type="submit" className="bg-transparent hover:bg-green-500 border-2 border-green-500 text-green-500 hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
           Crear Evento
         </button>
       </form>
+      </NeonCard>
 
+      <NeonCard>
       <h2 className="text-2xl font-semibold mb-2">Administrar Géneros</h2>
       <form onSubmit={handleSubmitGenero} className="mb-8">
         <div className="mb-4">
@@ -136,7 +140,7 @@ const Admin: React.FC = () => {
             id="nombreGenero"
             value={nombreGenero}
             onChange={(e) => setNombreGenero(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-700 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 text-black"
+            className="mt-1 block w-full max-w-sm rounded-md border-2 border-green-500 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 bg-transparent text-green-500"
             required
           />
         </div>
@@ -147,32 +151,41 @@ const Admin: React.FC = () => {
             id="imagenGeneroUrl"
             value={imagenGeneroUrl}
             onChange={(e) => setImagenGeneroUrl(e.target.value)}
-            className="mt-1 block w-full rounded-md border-gray-700 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 text-black"
+            className="mt-1 block w-full max-w-sm rounded-md border-2 border-green-500 shadow-sm focus:border-green-300 focus:ring focus:ring-green-200 focus:ring-opacity-50 bg-transparent text-green-500"
             required
           />
         </div>
-        <button type="submit" className="bg-green-500 hover:bg-green-700 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        <button type="submit" className="bg-transparent hover:bg-green-500 border-2 border-green-500 text-green-500 hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
           Crear Género
         </button>
       </form>
+      </NeonCard>
 
       <h2 className="text-2xl font-semibold mb-2">Géneros</h2>
-      <ul>
-        {generos.map((genero) => (
-          <li key={genero.id} className="mb-2">
-            {genero.nombre}
-          </li>
-        ))}
-      </ul>
+      {generos.length === 0 ? (
+        <p className="text-center text-gray-400">Aún no hay géneros creados.</p>
+      ) : (
+        <ul>
+          {generos.map((genero) => (
+            <li key={genero.id} className="mb-2">
+              {genero.nombre}
+            </li>
+          ))}
+        </ul>
+      )}
 
       <h2 className="text-2xl font-semibold mb-2">Eventos</h2>
-      <ul>
-        {eventos.map((evento) => (
-          <li key={evento.id} className="mb-2">
-            {evento.nombre} - {evento.fecha} - ${evento.precio}
-          </li>
-        ))}
-      </ul>
+      {eventos.length === 0 ? (
+        <p className="text-center text-gray-400">Aún no hay eventos creados.</p>
+      ) : (
+        <ul>
+          {eventos.map((evento) => (
+            <li key={evento.id} className="mb-2">
+              {evento.nombre} - {evento.fecha} - ${evento.precio}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

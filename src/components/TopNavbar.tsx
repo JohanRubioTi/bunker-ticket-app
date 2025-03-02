@@ -9,7 +9,9 @@ const TopNavbar: React.FC = () => {
         <ul className="flex space-x-6">
           <li><Link to="/" className="top-nav-link">Inicio</Link></li>
           <li><Link to="/admin" className="top-nav-link">Admin</Link></li>
-          <li><Link to="/ruleta" className="top-nav-link">Ruleta</Link></li>
+          <li><Link to="/tickets" className="top-nav-link">Mis Eventos</Link></li>
+          <li><Link to="/notifications" className="top-nav-link">Notificaciones</Link></li>
+          <li><Link to="/profile" className="top-nav-link">Perfil</Link></li>
         </ul>
       </div>
     </nav>

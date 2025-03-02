@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HeroBanner from './HeroBanner';
+import { Dice1, MessageCircle } from 'lucide-react';
 
 const eventosDestacados = [
   { id: '1', nombre: 'Noche Techno', fecha: '10/05/2024', imageUrl: 'https://via.placeholder.com/300x200', genreId: '1' },
@@ -36,7 +37,13 @@ const Home: React.FC = () => {
                 <Link to={`/evento/${evento.id}`} className="block bg-green-500 hover:bg-green-700 text-black font-bold py-2 px-4 rounded-full text-center transition duration-300">
                   Ver Boletas
                 </Link>
-              </div>
+                <button className="fixed bottom-8 right-8 bg-green-500 hover:bg-green-700 text-white font-bold py-4 px-4 rounded-full shadow-lg transition duration-300">
+        <Dice1 size={24} />
+      </button>
+      <button className="fixed bottom-20 right-8 bg-green-500 hover:bg-green-700 text-white font-bold py-4 px-4 rounded-full shadow-lg transition duration-300">
+        <MessageCircle size={24} />
+      </button>
+    </div>
             </div>
           ))}
         </div>

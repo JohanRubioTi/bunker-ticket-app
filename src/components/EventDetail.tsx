@@ -33,16 +33,25 @@ const EventDetail: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="event-card transition-all duration-200 hover:shadow-lg">
-        <img src={evento.imageUrl} alt={evento.nombre} className="w-full h-56 object-cover rounded-t-lg" />
-        <div className="p-4 hover:bg-gray-800">
-          <h1 className="text-xl font-semibold text-white mb-2 hover:text-gray-100">{evento.nombre}</h1>
-          <p className="text-gray-400 mb-4">{evento.fecha}</p>
+      <div className="event-card group transition-all duration-200 hover:shadow-lg">
+        <img src={evento.imageUrl} alt={evento.nombre} className="w-full h-56 object-cover rounded-t-lg transition duration-200 group-hover:brightness-50" />
+        <div className="p-4 group-hover:bg-black/70">
+          <h1 className="text-xl font-semibold text-white mb-2">{evento.nombre}</h1>
+          <p className="text-white mb-4">{evento.fecha}</p>
           <p className="text-gray-300 mb-4">{evento.descripcion}</p>
           <p className="text-xl font-semibold text-green-400 mb-4">Precio: ${evento.precio}</p>
 
           <div className="mb-4">
-            <label htmlFor="cantidad" className="block text-sm font-medium text-gray-300 text-gray-300">Cantidad:</label>
+            <h2 className="text-lg font-semibold text-white">Recomendaciones</h2>
+            <ul className="list-disc list-inside text-gray-300">
+                <li>Llega temprano para evitar filas.</li>
+                <li>Trae tu identificación oficial.</li>
+                <li>Disfruta de la mejor música!</li>
+            </ul>
+          </div>
+
+          <div className="mb-4">
+            <label htmlFor="cantidad" className="block text-sm font-medium text-gray-300">Cantidad:</label>
             <input
               type="number"
               id="cantidad"

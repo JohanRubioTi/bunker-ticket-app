@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 const eventosDestacados = [
@@ -15,6 +15,10 @@ const eventos = {
 const EventDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const evento = eventos[id as keyof typeof eventos];
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const [cantidad, setCantidad] = useState(1);
   const [procesandoPago, setProcesandoPago] = useState(false);

@@ -29,22 +29,13 @@ const Home: React.FC = () => {
         <h2 className="text-3xl font-bold mb-6 text-center">Eventos Destacados</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {eventosDestacados.map((evento) => (
-            <div key={evento.id} className="event-card">
+            <Link to={`/evento/${evento.id}`} key={evento.id} className="event-card">
               <img src={evento.imageUrl} alt={evento.nombre} className="w-full h-56 object-cover rounded-t-lg" />
               <div className="p-4">
                 <h3 className="text-xl font-semibold text-white mb-2">{evento.nombre}</h3>
                 <p className="text-gray-400 mb-4">{evento.fecha}</p>
-                <Link to={`/evento/${evento.id}`} className="block bg-green-500 hover:bg-green-700 text-black font-bold py-2 px-4 rounded-full text-center transition duration-300">
-                  Ver Boletas
-                </Link>
-                <button className="fixed bottom-8 right-8 bg-green-500 hover:bg-green-700 text-white font-bold py-4 px-4 rounded-full shadow-lg transition duration-300">
-        <Dice1 size={24} />
-      </button>
-      <button className="fixed bottom-20 right-8 bg-green-500 hover:bg-green-700 text-white font-bold py-4 px-4 rounded-full shadow-lg transition duration-300">
-        <MessageCircle size={24} />
-      </button>
-    </div>
-            </div>
+              </div>
+            </Link>
           ))}
         </div>
 
@@ -63,16 +54,13 @@ const Home: React.FC = () => {
         <h2 className="text-3xl font-bold mt-12 mb-6 text-center" id="all-events">Todos Los Eventos</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {todosLosEventos.map((evento) => (
-            <div key={evento.id} className="event-card">
+            <Link to={`/evento/${evento.id}`} key={evento.id} className="event-card">
               <img src={evento.imageUrl} alt={evento.nombre} className="w-full h-56 object-cover rounded-t-lg" />
               <div className="p-4">
                 <h3 className="text-xl font-semibold text-white mb-2">{evento.nombre}</h3>
                 <p className="text-gray-400 mb-4">{evento.fecha}</p>
-                <Link to={`/evento/${evento.id}`} className="block bg-green-500 hover:bg-green-700 text-black font-bold py-2 px-4 rounded-full text-center transition duration-300">
-                  Ver Boletas
-                </Link>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

@@ -4,7 +4,7 @@ import { Home, User, Bell, Ticket } from 'lucide-react';
 
 const MobileNavbar: React.FC = () => {
   return (
-    <nav className="mobile-navbar bg-gray-900 bg-opacity-75 border-t border-green-500 backdrop-blur-sm z-50 fixed bottom-0 w-full md:hidden"> {/* Visible on mobile, hidden on desktop */}
+    <nav className="mobile-navbar bg-black bg-opacity-75 border-t border-green-500 backdrop-blur-sm z-50 fixed bottom-0 w-full md:hidden"> {/* Visible on mobile, hidden on desktop */}
       <div className="container mx-auto py-3 flex justify-evenly items-center">
         <Link to="/" className="mobile-nav-link">
           <Home size={24} />

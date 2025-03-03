@@ -7,9 +7,10 @@ body {
   font-family: 'Rajdhani', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #000;
   color: #00ff00;
   overflow-x: hidden;
+   @apply bg-gradient-to-r from-fuchsia-500 via-black via-purple-700 to-blue-500;
+
 }
 
 @keyframes gradientShift {
@@ -25,10 +26,10 @@ body {
 }
 
 .full-screen-gradient {
-  background: linear-gradient(270deg, #040707, #004d4d, #000000); /* Darker, neon-accented gradient */
+
   background-size: 600% 600%;
-  animation: gradientShift 15s ease infinite; /* Slightly slower animation */
-  background-color: red; /* Temporary solid background for visibility */
+  animation: gradientShift 25s ease infinite;
+
 }
 
 /* Glitch Animation - More Keyframes and Longer Duration */
@@ -200,26 +201,20 @@ p, span, div, label, button, a, li, input, textarea, select {
 }
 
 .event-card {
-    @apply bg-black rounded-lg shadow-lg overflow-hidden border border-green-500 relative transition-transform duration-300 hover:scale-105;
+    @apply bg-black rounded-lg shadow-lg overflow-hidden border border-green-500 relative transition-transform duration-300 active:scale-95 cursor-pointer hover:scale-105;
 }
 
 .event-card::before {
     content: '';
     position: absolute;
-    inset: -2px;
+    inset: -1px;
     z-index: -1;
     border-radius: inherit;
-    background: linear-gradient(to right, #0f0, #000);
-    animation: neonGlow 2s linear infinite;
+    background: transparent;
 }
 
-@keyframes neonGlow {
-    0% {
-        filter: hue-rotate(0deg);
-    }
-    100% {
-        filter: hue-rotate(360deg);
-    }
+.event-card:hover:not(:active) {
+    transform: scale(1.05);
 }
 
 .genre-card {
@@ -234,6 +229,19 @@ p, span, div, label, button, a, li, input, textarea, select {
     border-radius: inherit;
     background: linear-gradient(to right, #0f0, #000);
     animation: neonGlow 2s linear infinite;
+}
+
+.genre-card:hover {
+    transform: scale(1.05);
+}
+
+@keyframes neonGlow {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        filter: hue-rotate(360deg);
+    }
 }
 
 .nav-link {
@@ -379,4 +387,16 @@ p, span, div, label, button, a, li, input, textarea, select {
   font-weight: bold;
   color: #00ff00; /* Neon green result text */
   text-shadow: 0 0 20px #00ff00; /* Neon glow for result text */
+}
+
+.recommendations-list li::before {
+    content: '•'; /* Bullet point character */
+    color: #00ff00; /* Neon green color */
+    display: inline-block;
+    width: 1em;
+    margin-left: -1.5em;
+}
+
+.recommendations-list {
+  @apply list-none pl-4;
 }

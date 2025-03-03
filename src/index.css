@@ -28,6 +28,7 @@ body {
   background: linear-gradient(270deg, #040707, #004d4d, #000000); /* Darker, neon-accented gradient */
   background-size: 600% 600%;
   animation: gradientShift 15s ease infinite; /* Slightly slower animation */
+  background-color: red; /* Temporary solid background for visibility */
 }
 
 /* Glitch Animation - More Keyframes and Longer Duration */

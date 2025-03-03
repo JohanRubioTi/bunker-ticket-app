@@ -15,7 +15,7 @@ function App() {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen text-white">
       <TopNavbar />
       <div className="content-area pb-20 md:pb-0 md:pt-16">
         <Routes>

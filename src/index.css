@@ -9,7 +9,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #00ff00;
   overflow-x: hidden;
-   @apply bg-gradient-to-r from-fuchsia-500 via-black via-purple-700 to-blue-500;
 
 }
 
@@ -25,12 +24,6 @@ body {
   }
 }
 
-.full-screen-gradient {
-
-  background-size: 600% 600%;
-  animation: gradientShift 25s ease infinite;
-
-}
 
 /* Glitch Animation - More Keyframes and Longer Duration */
 @keyframes glitch-anim {
@@ -399,4 +392,10 @@ p, span, div, label, button, a, li, input, textarea, select {
 
 .recommendations-list {
   @apply list-none pl-4;
+}
+
+.tickets-bg {
+  @apply bg-gradient-to-r from-neon-pink via-black via-electric-purple via-black via-bright-teal to-vivid-yellow;
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite;
 }

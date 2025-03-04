@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const TopNavbar: React.FC = () => {
   return (
-    <nav className="top-navbar bg-black bg-opacity-75 border-b border-green-500 backdrop-blur-sm z-50 hidden md:block"> {/* Hidden on mobile, visible on desktop */}
+    <nav className="top-navbar bg-black bg-opacity-75 border-b border-green-500 backdrop-blur-sm z-[500] hidden md:block"> {/* Hidden on mobile, visible on desktop */}
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <Link to="/" className="font-bold text-xl text-white">Bunker Bogotá</Link> {/* Brand */}
         <ul className="flex space-x-6">

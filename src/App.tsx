@@ -15,13 +15,9 @@ function App() {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen text-white" style={{
-      background: 'linear-gradient(225deg, #e11d48 5%, #000 15%, #000 25%,  #7c3aed 35%, #000 45%, #000 55%, #1d4ed8 65%, #000 75%, #000 85%, #06b6d4 95%)',
-      backgroundSize: '400% 400%',
-      animation: 'gradientShift 10s ease infinite',
-    }}>
+    <div className="bg-black min-h-screen text-white" >
       <TopNavbar />
-      <div className="content-area pb-20 md:pb-0 md:pt-16">
+      <div className="content-area">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/evento/:id" element={<EventDetail />} />

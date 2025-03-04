@@ -14,8 +14,7 @@ const Tickets: React.FC = () => {
   }, []);
 
   return (
-    <div className="mx-auto p-4 min-h-screen pt-20">
-      <div className="full-screen-gradient absolute top-0 left-0 w-full h-full z-[-1]"></div>
+    <div className="mx-auto p-4 min-h-screen pb-20 md:pb-0 md:pt-16 tickets-bg animate-gradientShift">
       <h2 className="text-3xl font-bold mb-6 text-center">Mis Boletos</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {tickets.map((ticket) => (
